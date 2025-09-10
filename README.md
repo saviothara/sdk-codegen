@@ -57,7 +57,7 @@ graph TB
     %% Storage
     subgraph STORAGE["💾 Storage & Secrets"]
         SecretMgr[(🔐 Google Secret Manager)]
-        UserSecrets[👤 User Credentials<br/>{secret}-{user_id}]
+        UserSecrets[👤 User Credentials<br/>secret-userid pattern]
         OAuthConfig[⚙️ OAuth Client Config]
         AppCreds[🔑 App Credentials]
         GCS[(☁️ Google Cloud Storage)]
@@ -158,7 +158,7 @@ graph TB
 ### 🔐 Authentication Flow
 1. **User Authentication**: Each user must individually authorize the bot via OAuth 2.0
 2. **EAP Auth Service**: Kubernetes-deployed service handling OAuth flows
-3. **Secret Management**: User-specific credentials stored as `{secret}-{user_id}`
+3. **Secret Management**: User-specific credentials stored with secret-userid pattern
 
 ### 🤖 Chat Bot Processing
 1. **Event-Driven**: Triggered by Google Chat MESSAGE events via Pub/Sub
@@ -198,8 +198,6 @@ Chat Bot → EAP Auth Service → Google OAuth → Secret Manager
 ### CI/CD Deployment
 ```
 GitHub → GitHub Actions → Cloud Build → Cloud Deploy → GKE
-
-
 
 
 
